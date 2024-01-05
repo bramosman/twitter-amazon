@@ -1,25 +1,32 @@
-import logo from './logo.svg';
-import './App.css';
+// src/App.js
+import React from 'react';
+import styled from 'styled-components';
+import SidePanel from './components/SidePanel.js';  // Add '.js' extension
+import SearchBar from './components/SearchBar.js';  // Add '.js' extension
+import MainContainer from './components/MainContainer.js';  // Add '.js' extension
 
-function App() {
+const AppContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+`;
+
+const MainAndSidePanelContainer = styled.div`
+  display: flex;
+  flex-direction: row; /* Change to row to place SidePanel on the left */
+  flex: 1;
+`;
+
+const App = () => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <AppContainer>
+      <SearchBar />
+      <MainAndSidePanelContainer>
+        <SidePanel />
+        <MainContainer />
+      </MainAndSidePanelContainer>
+    </AppContainer>
   );
-}
+};
 
 export default App;
