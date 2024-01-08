@@ -1,47 +1,35 @@
-// server/server.mjs
 import express from 'express';
-import cors from 'cors';
-import axios from 'axios';
-
-const app = express();
-const PORT = 5000;
-
-// Load environment variables
 import dotenv from 'dotenv';
+import Twitter from 'twitter';
+
+// Load environment variables from .env file
 dotenv.config();
 
-const { apiKey, apiSecretKey } = process.env;
-
-// Set CORS headers before defining routes
-app.use(cors());
-app.use(express.json());
-
-// Redirect requests to the root path to /tweets
-app.get('/', (req, res) => {
-  res.redirect('/tweets');
+// Twitter API configuration
+const client = new Twitter({
+  consumer_key: process.env.apiKey,
+  consumer_secret: process.env.apiSecretKey,
+  access_token_key: process.env.accessToken,
+  access_token_secret: process.env.accessTokenSecret,
 });
 
-app.get('/tweets', async (req, res) => {
-  const { query } = req.query;
+// Define a route
+const app = express();
+const port = process.env.PORT || 3000;
 
-  try {
-    // Construct the bearer token
-    const bearerToken = Buffer.from(`${apiKey}:${apiSecretKey}`).toString('base64');
-
-    const twitterResponse = await axios.get(`https://api.twitter.com/2/tweets/search/recent?query=${encodeURIComponent(query)}`, {
-      headers: {
-        'Authorization': `Bearer ${bearerToken}`,
-        'Content-Type': 'application/json',
-      },
-    });
-
-    res.json(twitterResponse.data);
-  } catch (error) {
-    console.error('Error fetching tweets from Twitter API:', error?.response?.data || error.message);
-    res.status(500).json({ error: 'Internal Server Error' });
-  }
+app.get('/tweets', (req, res) => {
+  // Your Twitter API logic here
+  const params = { screen_name: 'BramOsman4' }; // Replace with your Twitter screen name
+  client.get('statuses/user_timeline', params, (error, tweets, response) => {
+    if (!error) {
+      res.json({ tweets });
+    } else {
+      res.status(500).json({ error: 'Unable to fetch tweets' });
+    }
+  });
 });
 
-app.listen(PORT, () => {
-  console.log(`Server is running on port ${PORT}`);
+// Start the server
+app.listen(port, () => {
+  console.log(`Server is running on port ${port}`);
 });

@@ -1,7 +1,7 @@
-// twitterAPI.js
 import axios from 'axios';
 
-const BASE_URL = 'http://localhost:5000/tweets';
+// Update BASE_URL to match the deployment URL on Vercel
+const BASE_URL = '/api/tweets';
 
 export const getTweets = async (query) => {
   try {
