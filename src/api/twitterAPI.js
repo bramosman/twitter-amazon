@@ -2,7 +2,7 @@
 import axios from 'axios';
 
 // Update this URL with the correct backend URL
-const BASE_URL = 'https://your-backend.vercel.app/tweets';
+const BASE_URL = 'https://react-twitter-gray.vercel.app/tweets';
 
 export const getTweets = async (query) => {
   try {
