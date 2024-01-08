@@ -1,11 +1,11 @@
 // twitterAPI.js
 import axios from 'axios';
 
-const BASE_URL = 'https://react-twitter-gray.vercel.app/tweets';
+const BASE_URL = 'http://localhost:5000/tweets';
 
-export const getTweets = async () => {
+export const getTweets = async (query) => {
   try {
-    const response = await axios.get(BASE_URL);
+    const response = await axios.get(`${BASE_URL}?query=${query}`);
     console.log('Twitter API Response Status:', response.status);
     console.log('Twitter API Response Data:', response.data);
     return response.data;
