@@ -1,9 +1,13 @@
+// server.mjs
 import express from 'express';
 import dotenv from 'dotenv';
 import Twitter from 'twitter';
 
 // Load environment variables from .env file
 dotenv.config();
+
+const app = express();
+const port = process.env.PORT || 3000;
 
 // Twitter API configuration
 const client = new Twitter({
@@ -14,9 +18,6 @@ const client = new Twitter({
 });
 
 // Define a route
-const app = express();
-const port = process.env.PORT || 3000;
-
 app.get('/tweets', (req, res) => {
   // Your Twitter API logic here
   const params = { screen_name: 'BramOsman4' }; // Replace with your Twitter screen name

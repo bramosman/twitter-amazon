@@ -1,7 +1,8 @@
+// twitterAPI.js
 import axios from 'axios';
 
-// Update BASE_URL to match the deployment URL on Vercel
-const BASE_URL = '/api/tweets';
+// Update the BASE_URL to use the new domain
+const BASE_URL = 'https://react-twitter-gray.vercel.app/tweets';
 
 export const getTweets = async (query) => {
   try {
