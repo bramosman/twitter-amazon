@@ -10,6 +10,7 @@ export const getTweets = async (query) => {
     return response.data;
   } catch (error) {
     console.error('Error fetching tweets:', error.message);
-    throw new Error(`Failed to fetch tweets. Server response: ${error.message}`);
+    // Throw the original error to be caught and handled in MainContainer.js
+    throw error;
   }
 };

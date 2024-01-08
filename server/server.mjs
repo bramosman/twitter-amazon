@@ -1,31 +1,62 @@
 // server.mjs
-import express from 'express';
-import dotenv from 'dotenv';
-import Twitter from 'twitter';
+import React, { useState, useEffect } from 'react';
+import styled from 'styled-components';
+import { getTweets } from '../api/twitterAPI.js';
 
-dotenv.config();
+const MainContentWrapper = styled.div`
+  flex: 1;
+  padding: 20px;
+`;
 
-const app = express();
-const port = process.env.PORT || 3000;
+const MainContainer = () => {
+  const [tweets, setTweets] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
-const client = new Twitter({
-  consumer_key: process.env.apiKey,
-  consumer_secret: process.env.apiSecretKey,
-  access_token_key: process.env.accessToken,
-  access_token_secret: process.env.accessTokenSecret,
-});
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        // Fetch tweets using the getTweets function
+        const response = await getTweets('#matterport');
+        console.log('Twitter API Response:', response);
 
-app.get('/tweets', (req, res) => {
-  const params = { screen_name: 'BramOsman4' };
-  client.get('statuses/user_timeline', params, (error, tweets, response) => {
-    if (!error) {
-      res.json({ tweets });
-    } else {
-      res.status(500).json({ error: 'Unable to fetch tweets' });
-    }
-  });
-});
+        // Update state with fetched tweets
+        setTweets(response);
+        // Clear any previous errors
+        setError(null);
+      } catch (error) {
+        // Handle error
+        console.error('Error fetching tweets:', error);
 
-app.listen(port, () => {
-  console.log(`Server is running on port ${port}`);
-});
+        // Set an error message for user display
+        setError('Error loading tweets. Please try again later.');
+      } finally {
+        // Set loading to false regardless of success or failure
+        setLoading(false);
+      }
+    };
+
+    // Call fetchData function when the component mounts
+    fetchData();
+  }, []); // The empty dependency array ensures the effect runs only once, similar to componentDidMount
+
+  return (
+    <MainContentWrapper>
+      <h2>Main Content</h2>
+      {loading ? (
+        <p>Loading tweets...</p>
+      ) : (
+        <ul>
+          {tweets.map((tweet) => (
+            <li key={tweet.id} style={{ marginBottom: '10px' }}>
+              {tweet.text}
+            </li>
+          ))}
+        </ul>
+      )}
+      {error && <p style={{ color: 'red' }}>{error}</p>}
+    </MainContentWrapper>
+  );
+};
+
+export default MainContainer;
