@@ -29,7 +29,7 @@ const MainContainer = () => {
         console.error('Error fetching tweets:', error);
 
         // Set an error message for user display
-        setError('Error loading tweets. Please try again later.');
+        setError(error.message || 'Error loading tweets. Please try again later.');
       } finally {
         // Set loading to false regardless of success or failure
         setLoading(false);
@@ -45,6 +45,8 @@ const MainContainer = () => {
       <h2>Main Content</h2>
       {loading ? (
         <p>Loading tweets...</p>
+      ) : tweets.length === 0 ? (
+        <p>No tweets to display.</p>
       ) : (
         <ul>
           {tweets.map((tweet) => (
