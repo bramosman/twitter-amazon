@@ -1,7 +1,8 @@
 // twitterAPI.js
 import axios from 'axios';
 
-const BASE_URL = 'http://localhost:5000/tweets';
+// Update this URL with the correct backend URL
+const BASE_URL = 'https://your-backend.vercel.app/tweets';
 
 export const getTweets = async (query) => {
   try {
