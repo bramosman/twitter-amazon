@@ -20,6 +20,11 @@ const MainContainer = () => {
         const response = await getTweets('#matterport');
         console.log('Twitter API Response:', response);
 
+        // Check if the response is undefined or doesn't have a 'length' property
+        if (response === undefined || !response.length) {
+          throw new Error('No tweets found.');
+        }
+
         // Update state with fetched tweets
         setTweets(response);
         // Clear any previous errors
