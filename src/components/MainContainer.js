@@ -20,11 +20,6 @@ const MainContainer = () => {
         const response = await getTweets('#matterport');
         console.log('Twitter API Response:', response);
 
-        // Check if the response is undefined or doesn't have a 'length' property
-        if (response === undefined || !response.length) {
-          throw new Error('No tweets found.');
-        }
-
         // Update state with fetched tweets
         setTweets(response);
         // Clear any previous errors
@@ -34,7 +29,7 @@ const MainContainer = () => {
         console.error('Error fetching tweets:', error);
 
         // Set an error message for user display
-        setError(error.message || 'Error loading tweets. Please try again later.');
+        setError('Error loading tweets. Please try again later.');
       } finally {
         // Set loading to false regardless of success or failure
         setLoading(false);
@@ -50,8 +45,6 @@ const MainContainer = () => {
       <h2>Main Content</h2>
       {loading ? (
         <p>Loading tweets...</p>
-      ) : tweets.length === 0 ? (
-        <p>No tweets to display.</p>
       ) : (
         <ul>
           {tweets.map((tweet) => (
