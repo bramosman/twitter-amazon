@@ -8,15 +8,16 @@ export const getTweets = async (query) => {
   try {
     const response = await axios.get(`${BASE_URL}?query=${query}`);
     console.log('Twitter API Response Status:', response.status);
-
-    // Check if the response is HTML
-    if (response.headers['content-type'].includes('text/html')) {
-      console.error('Received HTML response from Twitter API');
-      throw new Error('Invalid response format');
-    }
-
     console.log('Twitter API Response Data:', response.data);
-    return response.data;
+
+    // Check if the response is an array
+    if (Array.isArray(response.data)) {
+      return response.data;
+    } else {
+      // If not an array, return an empty array or handle it according to your needs
+      console.error('Invalid response format:', response.data);
+      return [];
+    }
   } catch (error) {
     console.error('Error fetching tweets:', error.message);
     throw new Error(`Failed to fetch tweets. Server response: ${error.message}`);
