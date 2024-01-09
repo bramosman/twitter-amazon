@@ -1,25 +1,31 @@
-// twitterAPI.js
-import axios from 'axios';
+import express from 'express';
+import cors from 'cors';
+import { getTweets } from './api/twitterAPI.js';
 
-// Update this URL with the correct backend URL
-const BASE_URL = 'https://react-twitter-gray.vercel.app/tweets';
+const app = express();
 
-export const getTweets = async (query) => {
+// Enable CORS for all routes
+app.use(cors());
+
+// Define your API endpoint
+app.get('/tweets', async (req, res) => {
   try {
-    const response = await axios.get(`${BASE_URL}?query=${query}`);
-    console.log('Twitter API Response Status:', response.status);
-    console.log('Twitter API Response Data:', response.data);
+    const query = req.query.query || '#matterport';
+    const tweets = await getTweets(query);
 
-    // Check if the response is an array
-    if (Array.isArray(response.data)) {
-      return response.data;
-    } else {
-      // If not an array, return an empty array or handle it according to your needs
-      console.error('Invalid response format:', response.data);
-      return [];
-    }
+    // Set CORS headers
+    res.header('Access-Control-Allow-Origin', 'https://react-twitter-gray.vercel.app');
+    res.header('Access-Control-Allow-Methods', 'GET');
+    res.header('Access-Control-Allow-Headers', 'Content-Type');
+
+    res.json(tweets);
   } catch (error) {
-    console.error('Error fetching tweets:', error.message);
-    throw new Error(`Failed to fetch tweets. Server response: ${error.message}`);
+    console.error('Error fetching tweets:', error);
+    res.status(500).json({ error: 'Internal Server Error' });
   }
-};
+});
+
+const PORT = process.env.PORT || 5000;
+app.listen(PORT, () => {
+  console.log(`Server is running on port ${PORT}`);
+});
