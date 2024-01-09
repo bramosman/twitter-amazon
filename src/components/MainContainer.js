@@ -20,6 +20,12 @@ const MainContainer = () => {
         const response = await getTweets('#matterport');
         console.log('Twitter API Response:', response);
 
+        // Check if the response is an array
+        if (!Array.isArray(response)) {
+          console.error('Invalid response format');
+          throw new Error('Invalid response format');
+        }
+
         // Update state with fetched tweets
         setTweets(response);
         // Clear any previous errors
