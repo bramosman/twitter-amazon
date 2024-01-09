@@ -19,7 +19,7 @@ app.get('/tweets', async (req, res) => {
     res.header('Access-Control-Allow-Methods', 'GET');
     res.header('Access-Control-Allow-Headers', 'Content-Type');
 
-    res.json(tweets);
+    res.status(200).json(tweets);
   } catch (error) {
     console.error('Error fetching tweets:', error);
     res.status(500).json({ error: 'Internal Server Error' });
