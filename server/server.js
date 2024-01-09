@@ -1,4 +1,3 @@
-// server.js
 import express from 'express';
 import cors from 'cors';
 import { getTweets } from './api/twitterAPI.js';
@@ -13,6 +12,12 @@ app.get('/tweets', async (req, res) => {
   try {
     const query = req.query.query || '#matterport';
     const tweets = await getTweets(query);
+
+    // Set CORS headers
+    res.header('Access-Control-Allow-Origin', 'https://react-twitter-gray.vercel.app');
+    res.header('Access-Control-Allow-Methods', 'GET');
+    res.header('Access-Control-Allow-Headers', 'Content-Type');
+
     res.json(tweets);
   } catch (error) {
     console.error('Error fetching tweets:', error);
