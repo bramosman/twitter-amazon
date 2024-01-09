@@ -14,11 +14,15 @@ app.get('/tweets', async (req, res) => {
     const query = req.query.query || '#matterport';
     const tweets = await getTweets(query);
 
+    // Log the server response
+    console.log('Server Response:', tweets);
+
     // Set CORS headers
     res.header('Access-Control-Allow-Origin', 'https://react-twitter-gray.vercel.app');
     res.header('Access-Control-Allow-Methods', 'GET');
     res.header('Access-Control-Allow-Headers', 'Content-Type');
 
+    // Send the JSON response
     res.status(200).json(tweets);
   } catch (error) {
     console.error('Error fetching tweets:', error);
