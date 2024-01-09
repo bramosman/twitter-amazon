@@ -6,18 +6,26 @@ const BASE_URL = 'https://react-twitter-gray.vercel.app';
 
 export const getTweets = async (query) => {
   try {
-    const response = await axios.get(`${BASE_URL}/tweets?query=${query}`);
+    // Make a GET request to the /tweets endpoint with the specified query
+    const response = await axios.get(`${BASE_URL}/tweets`, {
+      params: { query },
+    });
+
+    // Log the full Twitter API response, status, and data
     console.log('Twitter API Full Response:', response);
     console.log('Twitter API Response Status:', response.status);
     console.log('Twitter API Response Data:', response.data);
 
+    // Check if the response is an array
     if (!Array.isArray(response.data)) {
       console.error('Invalid response format');
       throw new Error('Invalid response format');
     }
 
+    // Return the array of tweets
     return response.data;
   } catch (error) {
+    // Log and rethrow the error for handling in the calling code
     console.error('Error fetching tweets:', error.message);
     throw new Error(`Failed to fetch tweets. Server response: ${error.message}`);
   }
