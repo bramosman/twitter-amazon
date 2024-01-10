@@ -16,7 +16,9 @@ const MainContainer = () => {
     const fetchData = async () => {
       try {
         const response = await getTweets('#matterport');
-        setTweets(response);
+        const tweetData = response.data; // Assuming the response structure includes a 'data' property
+
+        setTweets(tweetData);
         setError(null);
       } catch (error) {
         console.error('Error fetching tweets:', error);
