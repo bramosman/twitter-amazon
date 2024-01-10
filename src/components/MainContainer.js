@@ -1,4 +1,3 @@
-// src/components/MainContainer.js
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import { getTweets } from '../api/twitterAPI.js';
@@ -9,7 +8,7 @@ const MainContentWrapper = styled.div`
 `;
 
 const MainContainer = () => {
-  const [tweets, setTweets] = useState('');
+  const [tweets, setTweets] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
@@ -36,7 +35,14 @@ const MainContainer = () => {
       {loading ? (
         <p>Loading tweets...</p>
       ) : (
-        <div dangerouslySetInnerHTML={{ __html: tweets }} />
+        <div>
+          {tweets.map((tweet, index) => (
+            <div key={index}>
+              <p>{tweet.text}</p>
+              <p>{tweet.author}</p>
+            </div>
+          ))}
+        </div>
       )}
       {error && <p style={{ color: 'red' }}>{error}</p>}
     </MainContentWrapper>
