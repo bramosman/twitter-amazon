@@ -9,42 +9,26 @@ const MainContentWrapper = styled.div`
 `;
 
 const MainContainer = () => {
-  const [tweets, setTweets] = useState([]);
+  const [tweets, setTweets] = useState('');
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        // Fetch tweets using the getTweets function
         const response = await getTweets('#matterport');
-        console.log('Twitter API Response:', response);
-
-        // Check if the response is an array
-        if (!Array.isArray(response)) {
-          console.error('Invalid response format');
-          throw new Error('Invalid response format');
-        }
-
-        // Update state with fetched tweets
         setTweets(response);
-        // Clear any previous errors
         setError(null);
       } catch (error) {
-        // Handle error
         console.error('Error fetching tweets:', error);
-
-        // Set an error message for user display
         setError('Error loading tweets. Please try again later.');
       } finally {
-        // Set loading to false regardless of success or failure
         setLoading(false);
       }
     };
 
-    // Call fetchData function when the component mounts
     fetchData();
-  }, []); // The empty dependency array ensures the effect runs only once, similar to componentDidMount
+  }, []);
 
   return (
     <MainContentWrapper>
@@ -52,13 +36,7 @@ const MainContainer = () => {
       {loading ? (
         <p>Loading tweets...</p>
       ) : (
-        <ul>
-          {tweets.map((tweet) => (
-            <li key={tweet.id} style={{ marginBottom: '10px' }}>
-              {tweet.text}
-            </li>
-          ))}
-        </ul>
+        <div dangerouslySetInnerHTML={{ __html: tweets }} />
       )}
       {error && <p style={{ color: 'red' }}>{error}</p>}
     </MainContentWrapper>

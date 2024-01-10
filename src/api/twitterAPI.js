@@ -16,13 +16,7 @@ export const getTweets = async (query) => {
     console.log('Twitter API Response Status:', response.status);
     console.log('Twitter API Response Data:', response.data);
 
-    // Check if the response is an array
-    if (!Array.isArray(response.data)) {
-      console.error('Invalid response format');
-      throw new Error('Invalid response format');
-    }
-
-    // Return the array of tweets
+    // Return the raw HTML content
     return response.data;
   } catch (error) {
     // Log and rethrow the error for handling in the calling code
