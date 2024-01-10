@@ -16,6 +16,7 @@ app.get('/tweets', async (req, res) => {
     res.header('Access-Control-Allow-Methods', 'GET');
     res.header('Access-Control-Allow-Headers', 'Content-Type');
 
+    res.setHeader('Content-Type', 'application/json'); // Set Content-Type header
     res.status(200).json(tweetData);
   } catch (error) {
     console.error('Error fetching and processing tweets:', error);
