@@ -16,10 +16,14 @@ const MainContainer = () => {
     const fetchData = async () => {
       try {
         const response = await getTweets('#matterport');
-        const tweetData = response.data; // Assuming the response structure includes a 'data' property
+        const tweetData = response.data;
 
-        setTweets(tweetData);
-        setError(null);
+        if (tweetData && Array.isArray(tweetData)) {
+          setTweets(tweetData);
+          setError(null);
+        } else {
+          setError('Invalid tweet data received.');
+        }
       } catch (error) {
         console.error('Error fetching tweets:', error);
         setError('Error loading tweets. Please try again later.');
@@ -38,12 +42,16 @@ const MainContainer = () => {
         <p>Loading tweets...</p>
       ) : (
         <div>
-          {tweets.map((tweet, index) => (
-            <div key={index}>
-              <p>{tweet.text}</p>
-              <p>{tweet.author}</p>
-            </div>
-          ))}
+          {tweets && tweets.length > 0 ? (
+            tweets.map((tweet, index) => (
+              <div key={index}>
+                <p>{tweet.text}</p>
+                <p>{tweet.author}</p>
+              </div>
+            ))
+          ) : (
+            <p>No tweets available.</p>
+          )}
         </div>
       )}
       {error && <p style={{ color: 'red' }}>{error}</p>}
