@@ -1,3 +1,4 @@
+// server.js
 import express from 'express';
 import cors from 'cors';
 import { getTweets } from './api/twitterAPI.js';
@@ -15,9 +16,12 @@ app.get('/tweets', async (req, res) => {
     res.header('Access-Control-Allow-Origin', 'https://react-twitter-gray.vercel.app');
     res.header('Access-Control-Allow-Methods', 'GET');
     res.header('Access-Control-Allow-Headers', 'Content-Type');
+    
+    // Set the Content-Type header to indicate HTML content
+    res.header('Content-Type', 'text/html');
 
-    res.setHeader('Content-Type', 'application/json'); // Set Content-Type header
-    res.status(200).json(tweetData);
+    // Return the HTML content
+    res.status(200).send(tweetData);
   } catch (error) {
     console.error('Error fetching and processing tweets:', error);
     res.status(500).json({ error: 'Internal Server Error' });

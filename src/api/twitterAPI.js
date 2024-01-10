@@ -1,3 +1,4 @@
+// twitterAPI.js
 import axios from 'axios';
 import { parse } from 'node-html-parser';
 
@@ -7,6 +8,8 @@ export const getTweets = async (query) => {
   try {
     const response = await axios.get(`${BASE_URL}/tweets`, {
       params: { query },
+      // Set the responseType to 'text' to handle HTML responses
+      responseType: 'text',
     });
 
     console.log('Twitter API Full Response:', response);
