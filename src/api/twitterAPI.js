@@ -1,6 +1,5 @@
-// twitterAPI.js
 import axios from 'axios';
-import { parse } from 'node-html-parser'; // You may need to install this library: npm install node-html-parser
+import { parse } from 'node-html-parser';
 
 const BASE_URL = 'https://react-twitter-gray.vercel.app';
 
@@ -31,8 +30,11 @@ const extractTweetData = (htmlContent) => {
 
   // Extract relevant tweet data
   const tweetData = tweetElements.map((tweetElement) => {
-    const tweetText = tweetElement.querySelector('.tweet-text').innerText; // Adjust this selector
-    const tweetAuthor = tweetElement.querySelector('.tweet-author').innerText; // Adjust this selector
+    const tweetTextElement = tweetElement.querySelector('.tweet-text'); // Adjust this selector
+    const tweetAuthorElement = tweetElement.querySelector('.tweet-author'); // Adjust this selector
+
+    const tweetText = tweetTextElement ? tweetTextElement.innerText : '';
+    const tweetAuthor = tweetAuthorElement ? tweetAuthorElement.innerText : '';
 
     return {
       text: tweetText,
