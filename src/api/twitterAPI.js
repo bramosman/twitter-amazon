@@ -16,9 +16,6 @@ export const getTweets = async (query) => {
     // Assuming the server returns an array directly
     if (Array.isArray(response.data)) {
       return response.data;
-    } else if (response.data && typeof response.data === 'object') {
-      // Assuming the server returns an object with a 'tweets' property
-      return response.data.tweets || [];
     } else {
       console.error('Invalid tweet data received.');
       throw new Error('Invalid tweet data received.');
@@ -28,5 +25,6 @@ export const getTweets = async (query) => {
     throw new Error(`Failed to fetch tweets. Server response: ${error.message}`);
   }
 };
+
 
 export default getTweets;
