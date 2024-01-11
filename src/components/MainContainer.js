@@ -17,8 +17,13 @@ const MainContainer = () => {
     const fetchData = async () => {
       try {
         const tweetData = await getTweets('#matterport');
-        setTweets(tweetData);
-        setError(null);
+
+        if (Array.isArray(tweetData)) {
+          setTweets(tweetData);
+          setError(null);
+        } else {
+          setError('Invalid tweet data received.');
+        }
       } catch (error) {
         console.error('Error fetching tweets:', error);
         setError('Error loading tweets. Please try again later.');
