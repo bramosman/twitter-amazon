@@ -12,11 +12,7 @@ app.get('/tweets', async (req, res) => {
     const query = req.query.query || '#matterport';
     const tweetData = await getTweets(query);
 
-    // Set CORS headers
-    res.header('Access-Control-Allow-Origin', 'https://react-twitter-gray.vercel.app');
-    res.header('Access-Control-Allow-Methods', 'GET');
-    res.header('Access-Control-Allow-Headers', 'Content-Type');
-
+    // No need to set CORS headers manually when using 'cors' middleware
     // Set the Content-Type header to indicate JSON content
     res.header('Content-Type', 'application/json');
 
