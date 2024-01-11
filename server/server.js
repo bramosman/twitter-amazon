@@ -18,7 +18,7 @@ app.get('/tweets', async (req, res) => {
     res.header('Access-Control-Allow-Headers', 'Content-Type');
 
     // Set the Content-Type header to indicate JSON content
-    res.header('Content-Type', 'application/json');
+    res.header('Content-Type', 'application/json'); // Make sure this line is present
 
     // Return the JSON-formatted data
     res.status(200).json(tweetData);
