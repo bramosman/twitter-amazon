@@ -6,6 +6,9 @@ export const getTweets = async (query) => {
   try {
     const response = await axios.get(`${BASE_URL}/tweets`, {
       params: { query },
+      headers: {
+        'Accept': 'application/json', // Set Accept header to request JSON
+      },
     });
 
     console.log('Twitter API Full Response:', response);
