@@ -17,11 +17,11 @@ app.get('/tweets', async (req, res) => {
     res.header('Access-Control-Allow-Methods', 'GET');
     res.header('Access-Control-Allow-Headers', 'Content-Type');
     
-    // Set the Content-Type header to indicate HTML content
-    res.header('Content-Type', 'text/html');
+    // Set the Content-Type header to indicate JSON content
+    res.header('Content-Type', 'application/json');
 
-    // Return the HTML content
-    res.status(200).send(tweetData);
+    // Return the JSON-formatted data
+    res.status(200).json(tweetData);
   } catch (error) {
     console.error('Error fetching and processing tweets:', error);
     res.status(500).json({ error: 'Internal Server Error' });
