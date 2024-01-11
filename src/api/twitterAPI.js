@@ -1,4 +1,3 @@
-// twitterAPI.js
 import axios from 'axios';
 
 const BASE_URL = 'https://react-twitter-gray.vercel.app';
@@ -25,6 +24,5 @@ export const getTweets = async (query) => {
     throw new Error(`Failed to fetch tweets. Server response: ${error.message}`);
   }
 };
-
 
 export default getTweets;

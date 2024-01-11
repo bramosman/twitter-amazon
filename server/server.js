@@ -1,4 +1,3 @@
-// server.js
 import express from 'express';
 import cors from 'cors';
 import { getTweets } from './api/twitterAPI.js';
@@ -12,7 +11,6 @@ app.get('/tweets', async (req, res) => {
     const query = req.query.query || '#matterport';
     const tweetData = await getTweets(query);
 
-    // No need to set CORS headers manually when using 'cors' middleware
     // Set the Content-Type header to indicate JSON content
     res.header('Content-Type', 'application/json');
 
