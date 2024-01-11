@@ -29,7 +29,16 @@ const extractTweetData = (htmlContent) => {
   const root = parse(htmlContent);
 
   // Assuming tweets are within a specific HTML structure
-  const tweetElements = root.querySelectorAll('.tweet'); // Adjust this selector based on your HTML structure
+  const tweetContainer = root.querySelector('#root'); // Adjust this selector based on your HTML structure
+
+  if (!tweetContainer) {
+    // If the tweet container is not found, return an empty array or handle the error accordingly
+    console.error('Tweet container not found in HTML');
+    return [];
+  }
+
+  // Assuming each tweet is within a specific HTML structure (replace with your actual structure)
+  const tweetElements = tweetContainer.querySelectorAll('.tweet'); // Adjust this selector based on your HTML structure
 
   // Extract relevant tweet data
   const tweetData = tweetElements.map((tweetElement) => {
@@ -47,3 +56,5 @@ const extractTweetData = (htmlContent) => {
 
   return tweetData;
 };
+
+export default getTweets;
