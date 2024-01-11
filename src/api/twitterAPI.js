@@ -13,7 +13,13 @@ export const getTweets = async (query) => {
     console.log('Twitter API Response Status:', response.status);
     console.log('Twitter API Response Data:', response.data);
 
-    return response.data; // Assuming the server directly returns an array of tweet objects
+    // Assuming the server returns an array directly
+    if (Array.isArray(response.data)) {
+      return response.data;
+    } else {
+      console.error('Invalid tweet data received.');
+      throw new Error('Invalid tweet data received.');
+    }
   } catch (error) {
     console.error('Error fetching tweets:', error.message);
     throw new Error(`Failed to fetch tweets. Server response: ${error.message}`);
