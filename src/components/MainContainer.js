@@ -1,3 +1,4 @@
+// MainContainer.js
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import { getTweets } from '../api/twitterAPI.js';
@@ -15,15 +16,9 @@ const MainContainer = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await getTweets('#matterport');
-        const tweetData = response.data;
-
-        if (tweetData && Array.isArray(tweetData)) {
-          setTweets(tweetData);
-          setError(null);
-        } else {
-          setError('Invalid tweet data received.');
-        }
+        const tweetData = await getTweets('#matterport');
+        setTweets(tweetData);
+        setError(null);
       } catch (error) {
         console.error('Error fetching tweets:', error);
         setError('Error loading tweets. Please try again later.');

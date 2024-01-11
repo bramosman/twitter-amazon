@@ -16,7 +16,7 @@ app.get('/tweets', async (req, res) => {
     res.header('Access-Control-Allow-Origin', 'https://react-twitter-gray.vercel.app');
     res.header('Access-Control-Allow-Methods', 'GET');
     res.header('Access-Control-Allow-Headers', 'Content-Type');
-    
+
     // Set the Content-Type header to indicate JSON content
     res.header('Content-Type', 'application/json');
 
