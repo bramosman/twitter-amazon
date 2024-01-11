@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const BASE_URL = 'https://react-twitter-gray.vercel.app';
+const BASE_URL = 'https://react-twitter-gray.vercel.app/tweets';
 
 export const getTweets = async (query) => {
   try {
