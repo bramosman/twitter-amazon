@@ -1,3 +1,4 @@
+// twitterAPI.js
 import axios from 'axios';
 
 const BASE_URL = 'https://react-twitter-gray.vercel.app';
@@ -7,7 +8,7 @@ export const getTweets = async (query) => {
     const response = await axios.get(`${BASE_URL}/tweets`, {
       params: { query },
       headers: {
-        'Accept': 'application/json', // Set Accept header to request JSON
+        'Accept': 'application/json', // Set the Accept header for JSON
       },
     });
 
