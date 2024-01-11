@@ -1,3 +1,4 @@
+// server.js
 import express from 'express';
 import cors from 'cors';
 import { getTweets } from './api/twitterAPI.js';
@@ -13,7 +14,7 @@ app.get('/tweets', async (req, res) => {
     const tweetData = await getTweets(query);
 
     // Set the Content-Type header to indicate JSON content
-    res.setHeader('Content-Type', 'application/json');
+    res.header('Content-Type', 'application/json');
 
     // Return the JSON-formatted data
     res.status(200).json(tweetData);
@@ -21,7 +22,7 @@ app.get('/tweets', async (req, res) => {
     console.error('Error fetching and processing tweets:', error);
 
     // Set the Content-Type header to indicate JSON content
-    res.setHeader('Content-Type', 'application/json');
+    res.header('Content-Type', 'application/json');
 
     // Return a JSON-formatted error response
     res.status(500).json({ error: 'Internal Server Error' });
