@@ -14,7 +14,9 @@ export const getTweets = async (query) => {
     });
 
     console.log('Twitter API Full Response:', response);
-    console.log('Twitter API Response Status:', response.status);
+
+    // Log the entire HTML response
+    console.log('HTML Response:', response.data);
 
     // Use the function returned by load to parse the HTML
     const $ = load(response.data);
