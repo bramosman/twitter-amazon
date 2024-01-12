@@ -8,17 +8,19 @@ export const getTweets = async (query) => {
     const response = await axios.get(`${BASE_URL}/tweets`, {
       params: { query },
       headers: {
-        'Accept': 'application/json', // Set the Accept header for JSON
+        'Accept': 'text/html', // Accept HTML response
       },
     });
 
     console.log('Twitter API Full Response:', response);
     console.log('Twitter API Response Status:', response.status);
-    console.log('Twitter API Response Data:', response.data);
+    
+    // Extract JSON data from HTML response
+    const jsonData = extractJsonFromHtml(response.data);
 
     // Assuming the server returns an array directly
-    if (Array.isArray(response.data)) {
-      return response.data;
+    if (Array.isArray(jsonData)) {
+      return jsonData;
     } else {
       console.error('Invalid tweet data received.');
       throw new Error('Invalid tweet data received.');
@@ -27,6 +29,14 @@ export const getTweets = async (query) => {
     console.error('Error fetching tweets:', error.message);
     throw new Error(`Failed to fetch tweets. Server response: ${error.message}`);
   }
+};
+
+// Function to extract JSON data from HTML
+const extractJsonFromHtml = (htmlData) => {
+  // Implement logic to extract JSON data from the HTML response
+  // For example, you can use a library like cheerio or regex
+  // Replace the following line with your implementation
+  return { data: 'Extracted JSON data from HTML' };
 };
 
 export default getTweets;

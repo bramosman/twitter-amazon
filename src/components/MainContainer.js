@@ -18,10 +18,12 @@ const MainContainer = () => {
       try {
         const tweetData = await getTweets('#matterport');
 
+        // Handle the case where tweetData is not an array
         if (Array.isArray(tweetData)) {
           setTweets(tweetData);
           setError(null);
         } else {
+          console.error('Invalid tweet data received.');
           setError('Invalid tweet data received.');
         }
       } catch (error) {
@@ -45,6 +47,7 @@ const MainContainer = () => {
           {tweets && tweets.length > 0 ? (
             tweets.map((tweet, index) => (
               <div key={index}>
+                {/* Assuming tweet has text and author properties, update accordingly */}
                 <p>{tweet.text}</p>
                 <p>{tweet.author}</p>
               </div>
