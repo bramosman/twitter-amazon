@@ -20,6 +20,11 @@ export const getTweets = async (query) => {
     const $ = load(response.data);
     const scriptContent = $('script[id="__NEXT_DATA__"]').html();
 
+    if (!scriptContent) {
+      console.error('No script content found in HTML.');
+      throw new Error('No script content found in HTML.');
+    }
+
     try {
       const jsonData = JSON.parse(scriptContent);
       // Assuming the server returns an array directly
