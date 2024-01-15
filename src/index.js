@@ -2,7 +2,7 @@
 import React from 'react';
 import { createRoot } from 'react-dom/client';
 import App from '../pages/App.js';  // Correct the import path
-import reportWebVitals from '../pages/reportWebVitals.js';
+import reportWebVitals from './reportWebVitals.js';
 import { decodedToken } from '../pages/decodeToken.js';
 
 const root = createRoot(document.getElementById('root'));

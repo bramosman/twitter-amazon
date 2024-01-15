@@ -1,9 +1,9 @@
 // src/App.js
 import React from 'react';
 import styled from 'styled-components';
-import SidePanel from '../src/components/SidePanel.js';  // Add '.js' extension
-import SearchBar from '../src/components/SearchBar.js';  // Add '.js' extension
-import MainContainer from '../src/components/MainContainer.js';  // Add '.js' extension
+import SidePanel from './components/SidePanel.js';  // Add '.js' extension
+import SearchBar from './components/SearchBar.js';  // Add '.js' extension
+import MainContainer from './components/MainContainer.js';  // Add '.js' extension
 
 const AppContainer = styled.div`
   display: flex;
