@@ -11,8 +11,9 @@ export const getTweets = async (query) => {
       },
     });
 
-    console.log('Twitter API Full Response:', response);
-    console.log('Twitter API Response Status:', response.status);
+    console.log('Twitter API Request URL:', `${BASE_URL}/tweets`);
+    console.log('Twitter API Request Parameters:', { query });
+    console.log('Twitter API Response Content-Type:', response.headers['content-type']);
     console.log('Twitter API Response Data:', response.data);
 
     // Assuming the server returns an array directly
@@ -27,5 +28,6 @@ export const getTweets = async (query) => {
     throw new Error(`Failed to fetch tweets. Server response: ${error.message}`);
   }
 };
+
 
 export default getTweets;
