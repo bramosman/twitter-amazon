@@ -1,9 +1,10 @@
-// pages/index.js
+// src/index.js
 import React from 'react';
 import { createRoot } from 'react-dom/client';
-import App from '../pages/App.js';  // Correct the import path
-import reportWebVitals from './reportWebVitals.js';
-import { decodedToken } from '../pages/decodeToken.js';
+import './index.css';
+import App from './App.js'; // Include the .js extension
+import reportWebVitals from './reportWebVitals.js'; // Include the .js extension
+import { decodedToken } from './decodeToken.js';
 
 const root = createRoot(document.getElementById('root'));
 root.render(
