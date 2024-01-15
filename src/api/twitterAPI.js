@@ -1,8 +1,8 @@
 import axios from 'axios';
 
-const BASE_URL = 'https://react-twitter-gray.vercel.app';
+const TWEETS_COLLECTION = 'tweets';
 
-export const getTweets = async (query) => {
+export const getTweets = async () => {
   try {
     const response = await axios.get(`${BASE_URL}/tweets`, {
       params: { query },
@@ -24,8 +24,8 @@ export const getTweets = async (query) => {
       throw new Error('Invalid tweet data received.');
     }
   } catch (error) {
-    console.error('Error fetching tweets:', error.message);
-    throw new Error(`Failed to fetch tweets. Server response: ${error.message}`);
+    console.error('Error fetching tweets from Firestore:', error);
+    throw new Error('Failed to fetch tweets.');
   }
 };
 
