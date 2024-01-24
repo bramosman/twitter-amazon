@@ -1,9 +1,9 @@
 // src/App.js
 import React from 'react';
 import styled from 'styled-components';
-import SidePanel from './components/SidePanel.js';  // Add '.js' extension
-import SearchBar from './components/SearchBar.js';  // Add '.js' extension
-import MainContainer from './components/MainContainer.js';  // Add '.js' extension
+import SidePanel from './components/SidePanel.js';
+import SearchBar from './components/SearchBar.js';
+import MainContainer from './components/MainContainer.js';
 
 const AppContainer = styled.div`
   display: flex;
@@ -18,6 +18,12 @@ const MainAndSidePanelContainer = styled.div`
 `;
 
 const App = () => {
+  // Access environment variables
+  const apiKey = process.env.apiKey;
+  const apiSecretKey = process.env.apiSecretKey;
+  const accessToken = process.env.accessToken;
+  const accessTokenSecret = process.env.accessTokenSecret;
+
   return (
     <AppContainer>
       <SearchBar />

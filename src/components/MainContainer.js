@@ -2,6 +2,7 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import { getTweets } from '../api/twitterAPI.js';
+import { db, addDoc, collection } from '../api/firebaseConfig'; // Adjust the path based on your project structure
 
 const MainContentWrapper = styled.div`
   flex: 1;
@@ -20,6 +21,18 @@ const MainContainer = () => {
 
         if (Array.isArray(tweetData)) {
           setTweets(tweetData);
+
+          // Add tweets to Firestore
+          await Promise.all(tweetData.map(tweet => {
+            const tweetsCollectionRef = collection(db, 'tweets');
+            return addDoc(tweetsCollectionRef, {
+              text: tweet.text,
+              author: tweet.author,
+              timestamp: new Date(tweet.timestamp),
+              // Add other fields as needed
+            });
+          }));
+
           setError(null);
         } else {
           setError('Invalid tweet data received.');
